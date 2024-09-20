@@ -1,0 +1,10 @@
+.env
+# Ignore Node.js modules
+node_modules/
+
+# Ignore build files
+/dist/
+/build/
+package-lock.json
+*.exe
+*.log

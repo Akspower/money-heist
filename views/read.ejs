@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Read User</title>
+    <style>
+        body {
+            background-image: url('https://images.thequint.com/thequint%2F2021-09%2Fb9aab177-f368-4185-91b4-b37f15c2b7ee%2Fmoneyheist.png?w=1200&auto=format%2Ccompress&ogImage=true');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: -1; /* Keep it behind the content */
+        }
+        .user:hover {
+            transform: translateY(-5px); /* Slight hover lift */
+        }
+        .user-image img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .user-image:hover img {
+            transform: scale(1.1); /* Hover zoom effect on image */
+        }
+    </style>
+</head>
+<body class="relative bg-zinc-900 text-gray-200">
+    <div class="container mx-auto px-4 py-10">
+        <h1 class="text-4xl font-bold mb-8 text-center text-gray-100">All Users</h1>
+        <div class="mb-6 text-center">
+            <a href="/" class="text-lg text-teal-400 hover:text-teal-500">Back To Home</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <% users.forEach(function(user){ %>
+            <div class="user bg-zinc-800 bg-opacity-90 p-6 rounded-lg shadow-lg hover:bg-zinc-700 transition-all duration-300">
+                <div class="user-image w-full h-52 mb-4 rounded-lg overflow-hidden flex items-center justify-center">
+                    <img src="<%= user.image %>" alt="Actor Image" class="object-cover w-full h-full">
+                </div>
+                <h3 class="text-2xl font-semibold mb-2 text-gray-100"><%= user.name %></h3>
+                <p class="text-gray-400 mb-4"><%= user.email %></p>
+                <div class="flex justify-between">
+                    <a class="text-teal-400 hover:text-teal-500" href="/edit/<%= user._id %>">Edit User</a>
+                    <a class="text-red-400 hover:text-red-500" href="/delete/<%= user._id %>">Delete User</a>
+                </div>
+            </div>
+          <% }) %>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Money Heist - Create User</title>
+    <style>
+        body {
+            background-image: url('https://wallpapers.com/images/featured/money-heist-segtwbhffwy01w82.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: -1;
+        }
+        .button {
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            background-color: #FF2C4B; /* Money Heist red */
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .button:hover {
+            background-color: #FF4255; /* Slight lighter red on hover */
+            transform: scale(1.05);
+        }
+        /* Input and button styles */
+        .input-field {
+            background-color: #262626;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            transition: border 0.3s ease;
+        }
+        .input-field:focus {
+            border: 2px solid #FF2C4B;
+        }
+    </style>
+</head>
+<body class="bg-black text-white flex items-center justify-center min-h-screen">
+    <div class="max-w-lg w-full p-8 bg-zinc-900 bg-opacity-80 rounded-lg shadow-lg">
+        <h1 class="text-4xl font-bold text-center mb-6 text-red-500">Join the Heist</h1>
+
+        <!-- Form to create user -->
+        <form action="/create" method="post">
+            <input 
+                type="text" 
+                name="name" 
+                placeholder="Enter Character Name" 
+                class="input-field"
+                required
+            >
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="Enter Email" 
+                class="input-field"
+                required
+            >
+            <input 
+                type="url" 
+                name="image" 
+                placeholder="Enter Image URL" 
+                class="input-field"
+            >
+            <div class="flex justify-center mt-6">
+                <input 
+                    type="submit" 
+                    value="Create Character" 
+                    class="button"
+                >
+            </div>
+        </form>
+
+        <!-- Navigation Button -->
+        <div class="mt-8 text-center">
+            <a href="/read" class="button">Meet Professor Team</a>
+        </div>
+    </div>
+</body>
+</html>
