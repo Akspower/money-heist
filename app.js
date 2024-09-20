@@ -4,10 +4,9 @@ const path = require("path");
 
 const userModel = require("./models/user");
 const connectDB = require("./db/connectDb");
-const user = require("./models/user");
 const PORT = 8000;
-const dotenv = require("dotenv").config();
-const create = require("./controllers/user.controller.js");
+require("dotenv").config();
+const User  = require("./models/user.js");
 const mongoose = require("mongoose");
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -48,7 +47,25 @@ app.get("/read", async (req, res) => {
   res.render("read", { users: allusers });
 });
 
-app.post("/create", create);
+app.post("/create", async(req,res)=>{
+    const { email, name, image } = req.body;
+
+  // Check if all fields are provided
+  if (!email || !name || !image) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  // Check if user already exists
+  const isExisting = await User.findOne({ $or: [{ email }, { name }] });
+  if (isExisting) {
+    return res.status(409).json({ message: "User Already Exists" }); // 409 Conflict status code
+  }
+
+  // Create a new user
+  const user = await User.create({ email, name, image });
+
+  res.render("index");
+});
 
 app.get("/delete/:id", async (req, res) => {
   let users = await userModel.findOneAndDelete({ _id: req.params.id });
